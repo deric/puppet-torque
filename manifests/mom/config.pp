@@ -28,7 +28,7 @@ class torque::mom::config(
   if ( $mom_prologue_file )  {
     file { '/var/lib/torque/mom_priv/prologue':
       ensure  => 'present',
-      source => $mom_prologue_file,
+      source  => $mom_prologue_file,
       owner   => 'root',
       group   => 'root',
       mode    => '0755',
@@ -38,7 +38,7 @@ class torque::mom::config(
   if ( $mom_epilogue_file )  {
     file { '/var/lib/torque/mom_priv/epilogue':
       ensure  => 'present',
-      source => $mom_epilogue_file,
+      source  => $mom_epilogue_file,
       owner   => 'root',
       group   => 'root',
       mode    => '0755',

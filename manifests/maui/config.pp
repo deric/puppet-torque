@@ -24,18 +24,16 @@ class torque::maui::config(
            mode    => '0644',
            require => Package['maui-server'],
        }
-   }
-        
-    else {
- 
+   }else {
+
       file { '/var/spool/maui/maui.cfg':
-           ensure  => 'present',
-      #    content => template('torque/maui.cfg.erb'),
-           source  => $mauifile,
-           owner   => 'root',
-           group   => 'root',
-           mode    => '0644',
-           require => Package['maui-server'],
+         ensure  => 'present',
+    #    content => template('torque/maui.cfg.erb'),
+         source  => $mauifile,
+         owner   => 'root',
+         group   => 'root',
+         mode    => '0644',
+         require => Package['maui-server'],
        }
 
    }
