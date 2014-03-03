@@ -1,0 +1,11 @@
+# server commands
+<% @sconfig.each do |value| -%>
+<%= value %>
+<% end -%>
+# queue commands
+<% @qconfig.keys.sort.each do |queue| -%>
+<%	@qconfig[queue].each do |value| -%>
+<%= value %>
+<%	end
+end -%>
+# node commands

@@ -1,0 +1,46 @@
+# written by puppet torque module
+# manual modifications will be overwritten
+SERVERHOST <%= @server %>
+SERVERPORT <%= @port %>
+SERVERMODE <%= @mode %>
+ADMIN1 <%= @admin1 %>
+RMCFG[base] <%= @rmcfg_type %> <%= @rmcfg_options %>
+ADMINHOST <%= @adminhost %>
+<% if @admin3 -%>
+ADMIN3 <%= @admin3 %>
+<% end -%>
+<% @general_options.keys.sort.each do |key| -%>
+<%= key %> <%= @general_options[key] %>
+<% end -%>
+<% if @options %>
+<%  @options.keys.sort.each do |key| -%>
+<%= key %> <%= @options[key] %>
+<% end -%>
+<% end -%>
+<% @groupcfg.keys.sort.each do |key| 
+	if @groupcfg[key].kind_of?(Array)
+		@groupcfg[key].each do |value| -%>
+GROUPCFG[<%= key %>] <%= value %>
+<%		end
+	else -%>
+GROUPCFG[<%= key %>] <%= @groupcfg[key] %>
+<%	end
+end -%>
+<% @usercfg.keys.sort.each do |key|
+	if @usercfg[key].kind_of?(Array)
+		@usercfg[key].each do |value| -%>
+USERCFG[<%= key %>] <%= value %>
+<%		end
+	else -%>
+USERCFG[<%= key %>] <%= @usercfg[key] %>
+<%	end
+end -%>
+<% @srcfg.keys.sort.each do |key|
+	if @srcfg[key].kind_of?(Array)
+		@srcfg[key].each do |value| -%>
+SRCFG[<%= key %>] <%= value %>
+<%		end
+	else -%>
+SRCFG[<%= key %>] <%= @srcfg[key] %>
+<%	end
+end -%>
