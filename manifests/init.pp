@@ -11,5 +11,5 @@
 # Sample Usage:
 #
 class torque {
-
+  $server_name = hiera('torque::server_name', $::fqdn)
 }

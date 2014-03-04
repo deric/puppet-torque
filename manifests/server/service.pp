@@ -1,7 +1,7 @@
 class torque::server::service(
   $ensure = 'running',
   $enable = true,
-) inherits torque::params {
+) inherits torque {
   service { 'pbs_server':
     ensure     => $ensure,
     enable     => $enable,

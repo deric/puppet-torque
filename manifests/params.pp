@@ -25,10 +25,9 @@ class torque::params {
 
 
   # server options
-  $server_install_ensure  = hiera("torque::params::server_install_ensure", 'installed')
   $server_service_ensure  = hiera("torque::params::server_service_ensure", 'running')
   $server_service_enable  = hiera("torque::params::server_service_enable", true)
-  $torque_server_name     = hiera("torque::params::torque_server_name", $::fqdn)
+
   # the following options are protected from being unset if they don't appear in torque_qmgr_server
   $torque_qmgr_present    = hiera("torque::params::torque_qmgr_present", [
     'acl_hosts',
@@ -75,10 +74,10 @@ class torque::params {
   $torque_qmgr_queues     = hiera("torque::params::torque_qmgr_queues", {})
   # maui options
   # Copy from file server
-  # If this is not undef, the maui configuration will be COPIED from the server rather than 
+  # If this is not undef, the maui configuration will be COPIED from the server rather than
   # BUILT from a template
   $mauifile               = hiera("torque::params::mauifile", undef)
- 
+
   # set up maui using puppet
   $maui_install_ensure    = hiera("torque::params::maui_install_ensure", 'installed')
   $maui_service_ensure    = hiera("torque::params::maui_service_ensure", 'running')
