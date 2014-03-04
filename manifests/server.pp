@@ -5,6 +5,6 @@ class torque::server {
   }
   class { 'torque::server::config': }
   class { 'torque::server::service': }
-  class { 'torque::munge': }
+  #class { 'torque::munge': }
   class { 'torque::maui': }
 }
