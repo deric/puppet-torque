@@ -1,5 +1,5 @@
 class torque::server::baseconfig(
-  $torque_server       =  $torque::server_name
+  $torque_server = $torque::server_name
 ) inherits torque {
   file { '/etc/torque/server_name':
     ensure  => 'present',

@@ -1,0 +1,4 @@
+---
+torque:
+  server:
+    server_ensure: 'present'

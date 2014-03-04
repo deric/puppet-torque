@@ -5,7 +5,6 @@ author 'deric'
 license 'Apache License, Version 2.0'
 summary 'Module for managing Torque'
 description 'Torque is an open-source version of PBS'
-project_page 'UNKNOWN'
+project_page 'https://github.com/deric/puppet-torque'
 
-## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+dependency 'puppetlabs/stdlib', '>= 2.0.0'
