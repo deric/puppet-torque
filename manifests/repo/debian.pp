@@ -16,14 +16,13 @@ class torque::repo::debian(
 
   if $manage_repo {
     case $package_source {
-      'torque': {
+      'hu-berlin': {
         apt::source { 'torque':
           location   => "http://debian.physik.hu-berlin.de/addons/${codename}",
           repos      => 'torque',
           notify     => Exec['apt_get_update_for_torque'],
         }
       }
-
       default: {}
     }
 
