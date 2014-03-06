@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe 'torque::server' do
 
+  let(:facts) {{
+    :operatingsystem => 'Debian',
+    :osfamily => 'Debian',
+    :lsbdistcodename => 'wheezy',
+    :lsbdistid => 'Debian',
+  }}
+
   include_context 'hieradata'
 
   it { should compile.with_all_deps }
@@ -9,4 +16,5 @@ describe 'torque::server' do
   it { should contain_package('torque-server') }
   it { should contain_package('torque-client') }
 
+  it { should contain_service('pbs_server') }
 end
