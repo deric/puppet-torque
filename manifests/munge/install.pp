@@ -1,5 +1,5 @@
 class torque::munge::install(
-  $ensure = $torque::params::munge_install_ensure,
+  $ensure = $torque::munge::install_ensure,
 ) {
   package { 'munge':
     ensure => $ensure,

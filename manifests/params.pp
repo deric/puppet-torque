@@ -1,9 +1,4 @@
 class torque::params {
-  # munge options
-  $munge_install_ensure   = hiera("torque::params::munge_install_ensure", 'installed')
-  $munge_service_ensure   = hiera("torque::params::munge_service_ensure", 'running')
-  $munge_service_enabled  = hiera("torque::params::munge_service_enabled", true)
-  $munge_key_location     = hiera("torque::params::munge_key_location", undef)
 
   # mom options
   $mom_install_ensure     = hiera("torque::params::mom_install_ensure", 'installed')
@@ -72,40 +67,4 @@ class torque::params {
   # this is a hash with the queue name as key and an array of configuration options as value
   # if no value is specified then the default options array ($torque_qmgr_qdefaults) is used
   $torque_qmgr_queues     = hiera("torque::params::torque_qmgr_queues", {})
-  # maui options
-  # Copy from file server
-  # If this is not undef, the maui configuration will be COPIED from the server rather than
-  # BUILT from a template
-  $mauifile               = hiera("torque::params::mauifile", undef)
-
-  # set up maui using puppet
-  $maui_install_ensure    = hiera("torque::params::maui_install_ensure", 'installed')
-  $maui_service_ensure    = hiera("torque::params::maui_service_ensure", 'running')
-  $maui_service_enable    = hiera("torque::params::maui_service_enable", true)
-  $maui_server            = hiera("torque::params::maui_server", $::fqdn)
-  $maui_port              = hiera("torque::params::maui_port", 40559)
-  $maui_mode              = hiera("torque::params::maui_mode", 'NORMAL')
-  $maui_rmcfgtype         = hiera("torque::params::maui_rmcfgtype", 'PBS')
-  $maui_rmcfgopt          = hiera("torque::params::maui_rmcfgopt", 'TIMEOUT=90')
-  $maui_adminhost         = hiera("torque::params::maui_adminhost", $::fqdn)
-  $maui_admin1            = hiera("torque::params::maui_admin1",'root')
-  $maui_admin3            = hiera("torque::params::maui_admin3",undef)
-  $maui_generalopt        = hiera("torque::params::maui_generalopt", {
-    'NODESYNCTIME'     => '00:00:30',
-    # Set PBS server polling interval. If you have short # queues
-    # or/and jobs it is worth to set a short interval. (default 10 seconds)
-    'RMPOLLINTERVAL'   => '00:00:30',
-    # a max. 10 MByte log file in a logical location
-    'LOGFILE'          => '/var/log/maui.log',
-    'LOGFILEMAXSIZE'   => 10000000,
-    'LOGLEVEL'         => 1,
-    'LOGFILEROLEDEPTH' => 10,
-    # Set the delay to 5 min before Maui tries to run a job again, in
-    # case it failed to run the first time. The default value is 1 hour.
-    'DEFERTIME'        => '00:05:00',
-  })
-  $maui_options           = hiera("torque::params::maui_options", {})
-  $maui_groupcfg          = hiera("torque::params::maui_groupcfg", {})
-  $maui_usercfg           = hiera("torque::params::maui_usercfg", {})
-  $maui_srcfg             = hiera("torque::params::maui_srcfg", {})
 }

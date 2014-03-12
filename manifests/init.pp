@@ -12,8 +12,9 @@
 #
 class torque(
   $server_name    = $::fqdn,
-  $manage_repo    = true,
+  $manage_repo    = false,
   $package_source = 'hu-berlin',
+
 ) {
 
 }
