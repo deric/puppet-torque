@@ -16,5 +16,5 @@ describe 'torque::server' do
   it { should contain_package('torque-server') }
   it { should contain_package('torque-client') }
 
-  it { should contain_service('pbs_server') }
+  it { should contain_service('torque-server') }
 end
