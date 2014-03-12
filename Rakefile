@@ -12,7 +12,6 @@ PuppetLint.configuration.ignore_paths = ["spec/fixtures/modules/apt/manifests/*.
 PuppetLint.configuration.log_format = '%{path}:%{linenumber}:%{KIND}: %{message}'
 PuppetLint.configuration.send('disable_80chars')
 task :librarian_spec_prep do
-  sh 'touch spec/fixtures/manifests/site.pp'
   sh 'librarian-puppet install --path=spec/fixtures/modules/'
 end
 task :spec_prep => :librarian_spec_prep
