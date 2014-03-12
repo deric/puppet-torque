@@ -7,12 +7,20 @@ class torque::server::qmgrconfig(
   $sconfig = torque_config_diff('server', $qmgr_server)
   $qconfig = torque_config_diff('queue', $qmgr_queues, $qmgr_queue_defaults)
 
+  file { '/var/lib/torque':
+    ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+  }
+
   file { '/var/lib/torque/qmgr_config':
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',
     mode    => '0600',
     content => template('torque/qmgr_config.erb'),
+    require => File['/var/lib/torque'],
   }
 
   exec { 'qmgr update':
