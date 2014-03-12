@@ -23,6 +23,13 @@ class torque::mom(
     mode    => '0644',
   }
 
+  file { '/var/lib/torque/mom_priv':
+    ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+  }
+
   file { '/etc/torque/mom/config':
     ensure  => 'present',
     content => template('torque/pbs_config.erb'),
@@ -47,7 +54,7 @@ class torque::mom(
       owner   => 'root',
       group   => 'root',
       mode    => '0755',
-      require => Package['torque-mom'],
+      require => [File['/var/lib/torque/mom_priv'], Package['torque-mom']],
     }
   }
   if ( $mom_epilogue_file )  {
@@ -57,7 +64,7 @@ class torque::mom(
       owner   => 'root',
       group   => 'root',
       mode    => '0755',
-      require => Package['torque-mom'],
+      require => [File['/var/lib/torque/mom_priv'],Package['torque-mom']],
     }
   }
 }
