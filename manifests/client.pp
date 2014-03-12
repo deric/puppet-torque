@@ -5,18 +5,13 @@ class torque::client(
   $mom_service_ensure = true,
   ) inherits torque {
 
-  # job execution engine for Torque batch system
-  package { 'torque-mom':
-    ensure => $mom_ensure,
-  }
-
   # command line interface to Torque server
   package { 'torque-client':
     ensure => $ensure,
   }
 
   class { 'torque::mom':
-    torque_server =>  $torque::server_name
+    torque_server =>  $torque::server_name,
   }
 
   service { 'pbs_mom':
