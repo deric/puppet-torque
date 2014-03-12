@@ -2,7 +2,7 @@ require 'puppet'
 require 'rspec'
 require 'puppetlabs_spec_helper/module_spec_helper'
 require 'shared_context'
-
+require 'rspec-puppet/coverage'
 
 fixture_path = File.expand_path(File.join(__FILE__, '..', 'fixtures'))
 
@@ -15,3 +15,5 @@ end
 
 Puppet::Util::Log.level = :warning
 Puppet::Util::Log.newdestination(:console)
+
+at_exit { RSpec::Puppet::Coverage.report! }
