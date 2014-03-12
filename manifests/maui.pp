@@ -50,7 +50,7 @@ class torque::maui(
       mode    => '0644',
       require => Package[$package],
     }
-  }else {
+  } else {
     file { '/var/spool/maui/maui.cfg':
       ensure  => 'present',
       content => template('torque/maui.cfg.erb'),

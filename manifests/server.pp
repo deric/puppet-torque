@@ -3,7 +3,8 @@
 class torque::server(
   $server_ensure = 'present',
   $client_ensure = 'present',
-) {
+) inherits torque {
+
   package { 'torque-server':
     ensure => $server_ensure,
   }
@@ -11,11 +12,8 @@ class torque::server(
     ensure => $client_ensure,
   }
 
-
-
   class { 'torque::server::config': }
   class { 'torque::server::service': }
   #class { 'torque::munge': }
-  class { 'torque::repo': } ~>
   class { 'torque::maui': }
 }

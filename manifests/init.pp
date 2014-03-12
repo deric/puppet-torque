@@ -17,4 +17,8 @@ class torque(
 
 ) {
 
+  class {'torque::repo':
+    manage_repo => $manage_repo,
+  }
+
 }

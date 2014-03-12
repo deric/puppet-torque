@@ -16,6 +16,17 @@ describe 'torque' do
           :lsbdistid => 'debian',
         }
       end
+
+      context 'enable apt repository' do
+        let(:params) {{
+          :manage_repo => true,
+        }}
+
+        it { should contain_apt__source('torque').with(
+          'location'   => "http://debian.physik.hu-berlin.de/addons/wheezy",
+        )}
+      end
     end
   end
+
 end

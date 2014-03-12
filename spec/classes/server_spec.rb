@@ -17,9 +17,4 @@ describe 'torque::server' do
   it { should contain_package('torque-client') }
 
   it { should contain_service('pbs_server') }
-
-
-  it { should contain_apt__source('torque').with(
-    'location'   => "http://debian.physik.hu-berlin.de/addons/wheezy",
-  )}
 end
