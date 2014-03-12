@@ -1,4 +1,5 @@
 #puppet-torque
+[![Build Status](https://travis-ci.org/deric/puppet-torque.png?branch=master)](https://travis-ci.org/deric/puppet-torque)
 
 This is the torque module.
 
