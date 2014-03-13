@@ -44,7 +44,7 @@ class torque::mom(
   # have to ensure that the master server name exists
   ensure_resource('file', '/etc/torque/server_name', {
     ensure  => 'present',
-    content => template("torque/server_name.erb"),
+    content => template("${module_name}/server_name.erb"),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',

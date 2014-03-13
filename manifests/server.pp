@@ -57,14 +57,14 @@ class torque::server(
     ensure => $server_ensure,
   }
 
-  file { '/etc/torque/server_name':
+  ensure_resource('file', '/etc/torque/server_name', {
     ensure  => 'present',
     content => template("${module_name}/server_name.erb"),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     require => Package['torque-server'],
-  }
+  })
 
   class { 'torque::server::config':
     qmgr_server         => $qmgr_conf,

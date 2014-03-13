@@ -53,7 +53,7 @@ class torque::maui(
   } else {
     file { '/var/spool/maui/maui.cfg':
       ensure  => 'present',
-      content => template('torque/maui.cfg.erb'),
+      content => template("${module_name}/maui.cfg.erb"),
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
