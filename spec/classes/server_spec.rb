@@ -37,7 +37,7 @@ describe 'torque::server' do
 
   it {
     should contain_file(
-      '/var/lib/torque/qmgr_config'
+      '/var/spool/torque/qmgr_config'
     ).with({
     'ensure'  => 'present',
     'owner'   => 'root',
