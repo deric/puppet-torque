@@ -5,6 +5,11 @@ class torque::server::config (
   $qmgr_present,
 ) {
 
+  validate_array($qmgr_server)
+  validate_array($qmgr_queue_defaults)
+  validate_array($qmgr_present)
+  validate_hash($qmgr_queues)
+
   $sconfig = torque_config_diff('server', $qmgr_server)
   $qconfig = torque_config_diff('queue', $qmgr_queues, $qmgr_queue_defaults)
 
