@@ -14,17 +14,11 @@ class torque::client(
   }
 
   class { 'torque::mom':
-    server_name   => $server_name,
-    mom_ensure    => $mom_ensure
-  }
-
-  service { $mom_service_name:
-    ensure     => $mom_service_ensure,
-    enable     => $mom_service_enable,
-    hasrestart => true,
-    hasstatus  => true,
-    require    => [Package['torque-mom'], Class['torque::mom']],
-    subscribe  => File['/etc/torque/mom/config'],
+    server_name        => $server_name,
+    mom_ensure         => $mom_ensure,
+    mom_service_name   => $mom_service_name,
+    mom_service_enable => $mom_service_enable,
+    mom_service_ensure => $mom_service_ensure,
   }
 
   if($enable_munge) {

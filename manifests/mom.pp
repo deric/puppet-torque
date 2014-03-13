@@ -9,7 +9,10 @@ class torque::mom(
   $usecp             = [],
   $mom_prologue_file = undef,
   $mom_epilogue_file = undef,
+  $mom_service_name  = 'torque-mom',
   $mom_ensure        = 'installed',
+  $mom_service_enable = true,
+  $mom_service_ensure = 'running',
   # For TORQUE 2.1 and later, TORQUE_HOME is /var/spool/torque/
   $torque_home       = '/var/spool/torque'
 ) inherits torque {
@@ -63,4 +66,14 @@ class torque::mom(
       require => [File["${torque_home}/mom_priv"], Package['torque-mom']],
     }
   }
+
+  service { $mom_service_name:
+    ensure     => $mom_service_ensure,
+    enable     => $mom_service_enable,
+    hasrestart => true,
+    hasstatus  => true,
+    require    => [Package['torque-mom'], Class['torque::mom']],
+    subscribe  => File["${torque_home}/mom_priv/config"],
+  }
+
 }
