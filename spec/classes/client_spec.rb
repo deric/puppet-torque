@@ -14,6 +14,9 @@ describe 'torque::client' do
     :server_name => 'foo.bar'
   }}
 
+  it { should contain_class('torque::client') }
+  it { should contain_class('torque::mom') }
+
   it { should contain_package('torque-mom').with(
         :ensure => 'installed',
   )}

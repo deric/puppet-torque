@@ -10,6 +10,7 @@ describe 'torque::mom' do
     :processorcount  => 2,
   }}
 
+  it { should contain_class('torque::mom') }
   it { should contain_package('torque-mom') }
   it { should contain_file('/etc/torque/mom/config') }
 end

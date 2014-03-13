@@ -13,6 +13,8 @@ describe 'torque::server' do
   include_context 'hieradata'
 
   it { should compile.with_all_deps }
+  it { should contain_class('torque::server') }
+  it { should contain_class('torque::server::config') }
 
   it { should contain_package('torque-server') }
   it { should contain_service('torque-server').with(
