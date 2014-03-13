@@ -1,5 +1,5 @@
-$pbsserver <%= @torque_server %>
-$restricted <%= @torque_server %>
+$pbsserver <%= @server_name %>
+$restricted <%= @server_name %>
 <% @restricted.each do |server| -%>
 $restricted <%= server %>
 <% end -%>
@@ -13,6 +13,6 @@ $max_load <%= max_load %>
 $<%= key %> <%= @options[key] %>
   <%- end -%>
 <%- end -%>
-<%- if @usecp -%><% @usecp.each do |dir| %> 
+<%- if @usecp -%><% @usecp.each do |dir| %>
 $usecp <%= dir %><%- end -%>
 <% end %>

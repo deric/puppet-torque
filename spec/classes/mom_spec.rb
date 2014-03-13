@@ -25,4 +25,15 @@ describe 'torque::mom' do
     'mode'    => '0644',
     }).with_content(/foo.bar/)
   }
+
+  it {
+    should contain_file(
+      '/etc/torque/mom/config'
+    ).with({
+    'ensure'  => 'present',
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0644',
+    }).with_content(/pbsserver foo.bar/)
+  }
 end
