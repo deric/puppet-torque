@@ -52,6 +52,9 @@ class torque::server(
   $enable_munge = false,
 ) inherits torque {
 
+  validate_bool($enable_maui)
+  validate_bool($enable_munge)
+
   package { 'torque-server':
     ensure => $server_ensure,
   }
