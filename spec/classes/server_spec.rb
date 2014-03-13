@@ -28,6 +28,17 @@ describe 'torque::server' do
     }).with_content(/foo.bar/)
   }
 
+  it {
+    should contain_file(
+      '/var/lib/torque/qmgr_config'
+    ).with({
+    'ensure'  => 'present',
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0600',
+    }).with_content(/# server commands/)
+  }
+
   context 'setting custom server_name' do
     let(:params) {{
       :server_name => 'server.example.com'

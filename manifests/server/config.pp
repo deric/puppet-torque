@@ -1,8 +1,9 @@
 class torque::server::config (
-  $qmgr_server         = $torque::params::torque_qmgr_server,
-  $qmgr_queue_defaults = $torque::params::torque_qmgr_qdefaults,
-  $qmgr_queues         = $torque::params::torque_qmgr_queues,
-) inherits torque::params {
+  $qmgr_server,
+  $qmgr_queue_defaults,
+  $qmgr_queues,
+  $qmgr_present,
+) {
 
   $sconfig = torque_config_diff('server', $qmgr_server)
   $qconfig = torque_config_diff('queue', $qmgr_queues, $qmgr_queue_defaults)

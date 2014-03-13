@@ -1,7 +1,7 @@
 class torque::munge::service(
-  $ensure = $torque::params::munge_service_ensure,
-  $enable = $torque::params::munge_service_enabled,
-) inherits torque::params {
+  $ensure = 'running',
+  $enable = true,
+) {
   service { 'munge':
     ensure     => $ensure,
     enable     => $enable,

@@ -1,6 +1,6 @@
 class torque::munge::config(
-  $key_location = $torque::params::munge_key_location,
-) inherits torque::params {
+  $key_location = undef,
+) {
   file { '/etc/munge/munge.key':
     ensure  => 'present',
     source  => $key_location,
