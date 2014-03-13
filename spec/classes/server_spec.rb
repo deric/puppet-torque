@@ -14,7 +14,5 @@ describe 'torque::server' do
   it { should compile.with_all_deps }
 
   it { should contain_package('torque-server') }
-  it { should contain_package('torque-client') }
-
   it { should contain_service('torque-server') }
 end

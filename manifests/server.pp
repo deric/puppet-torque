@@ -22,12 +22,8 @@ class torque::server(
     require => Package['torque-server'],
   }
 
-  package { 'torque-client':
-    ensure => $client_ensure,
-  }
-
   class { 'torque::server::config':
-    server_name => $server_name,
+
   }
 
   service { $service_name:

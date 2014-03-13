@@ -10,6 +10,10 @@ describe 'torque::client' do
     :processorcount  => 2,
   }}
 
+  let(:params){{
+    :server_name => 'foo.bar'
+  }}
+
   it { should contain_package('torque-mom') }
   it { should contain_package('torque-client') }
 
