@@ -1,16 +1,39 @@
 #puppet-torque
 [![Build Status](https://travis-ci.org/deric/puppet-torque.png?branch=master)](https://travis-ci.org/deric/puppet-torque)
 
-This is the torque module.
+This is a Puppet module for managing Torque resource manager and Maui.
 
-License
--------
+## Usage
+
+server:
+```puppet
+class { 'torque::server': }
+```
+By default `server_name` is the `$::hostname` of the server node (we get it from Facter). You can choose to use other fact of some value, e.g.:
+
+```puppet
+class { 'torque::server':
+  server_name => $::fqdn
+}
+```
+
+client (a computing node):
+
+```puppet
+class { 'torque::client':
+  server_name => 'server.example.com'
+}
+```
+
+## Hiera support
+
+Hiera is supported out-of-the-box, you can set any class parameter from YAML config files.
+
+```yaml
+torque::server::server_name: '192.168.1.1'
+```
+
+
+## License
+
 Apache License 2.0
-
-Contact
--------
-
-
-Support
--------
-
