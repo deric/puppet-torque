@@ -40,15 +40,6 @@ class torque::mom(
     require => [File['/etc/torque/mom'], Package['torque-mom']],
   }
 
-  file { '/etc/torque/server_name':
-    ensure  => 'present',
-    content => template("torque/server_name.erb"),
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => Package['torque-mom'],
-  }
-
   if ( $mom_prologue_file )  {
     file { '/var/lib/torque/mom_priv/prologue':
       ensure  => 'present',
