@@ -27,4 +27,16 @@ describe 'torque::server' do
     'mode'    => '0644',
     }).with_content(/foo.bar/)
   }
+
+  context 'setting custom server_name' do
+    let(:params) {{
+      :server_name => 'server.example.com'
+    }}
+
+    it {
+      should contain_file(
+        '/etc/torque/server_name'
+      ).with_content(/server.example.com/)
+    }
+  end
 end

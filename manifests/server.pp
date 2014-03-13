@@ -3,7 +3,6 @@
 class torque::server(
   $server_name    = $::hostname,
   $server_ensure  = 'present',
-  $client_ensure  = 'present',
   $service_name   = 'torque-server',
   $service_ensure = 'running',
   $service_enable = true,
