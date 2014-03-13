@@ -10,7 +10,7 @@ class torque::client(
   $cpus               = $::processorcount,
   ) inherits torque {
 
-  $fhost = $name
+  $fhost = $::fqdn
 
   # command line interface to Torque server
   package { 'torque-client':
