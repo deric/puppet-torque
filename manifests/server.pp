@@ -32,7 +32,9 @@ class torque::server(
     'default_node = lcgpro',
     'node_pack = False',
     'kill_delay = 10',
-    "authorized_users = *@${::fqdn}",
+# attribute doesn't seem to be supported
+# in all versions
+#    "authorized_users = *@${::fqdn}",
   ],
   $qmgr_queue_defaults = [
     'queue_type = Execution',
