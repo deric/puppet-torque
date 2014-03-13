@@ -1,5 +1,5 @@
-$pbsserver <%= @server_name %>
-$restricted <%= @server_name %>
+$pbsserver <%= @torque_server %>
+$restricted <%= @torque_server %>
 <% @restricted.each do |server| -%>
 $restricted <%= server %>
 <% end -%>

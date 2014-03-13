@@ -1,5 +1,6 @@
 class torque::mom(
-  $server_name       = $torque::server_name,
+  # cluster scheduler address
+  $torque_server,
   $restricted        = [],
   $ideal_load_adj    = 0.2,
   $max_load_adj      = 1.2,

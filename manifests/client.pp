@@ -1,5 +1,5 @@
 class torque::client(
-  $server_name        = $torque::server_name,
+  $torque_server,
   $mom_ensure         = 'installed',
   $package_ensure     = 'installed',
   $mom_service_name   = 'torque-mom',
@@ -14,7 +14,7 @@ class torque::client(
   }
 
   class { 'torque::mom':
-    server_name        => $server_name,
+    torque_server      => $torque_server,
     mom_ensure         => $mom_ensure,
     mom_service_name   => $mom_service_name,
     mom_service_enable => $mom_service_enable,

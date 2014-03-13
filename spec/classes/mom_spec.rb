@@ -14,6 +14,10 @@ describe 'torque::mom' do
   it { should contain_class('torque::mom') }
   it { should contain_package('torque-mom') }
 
+  let(:params) {{
+    :torque_server => 'my.server.com'
+  }}
+
   it {
     should contain_file(
       '/etc/torque/server_name'
@@ -33,12 +37,13 @@ describe 'torque::mom' do
     'owner'   => 'root',
     'group'   => 'root',
     'mode'    => '0644',
-    }).with_content(/pbsserver foo.bar/)
+    }).with_content(/pbsserver my.server.com/)
   }
 
   context 'changing torque home directory' do
     let(:params){{
-      :torque_home => '/usr/spool/PBS'
+      :torque_server => 'torque.server.com',
+      :torque_home   => '/usr/spool/PBS'
     }}
 
     it {
@@ -49,7 +54,7 @@ describe 'torque::mom' do
       'owner'   => 'root',
       'group'   => 'root',
       'mode'    => '0644',
-      }).with_content(/pbsserver foo.bar/)
+      }).with_content(/pbsserver torque.server.com/)
     }
   end
 end
