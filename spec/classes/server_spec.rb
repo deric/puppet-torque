@@ -15,7 +15,10 @@ describe 'torque::server' do
   it { should compile.with_all_deps }
 
   it { should contain_package('torque-server') }
-  it { should contain_service('torque-server') }
+  it { should contain_service('torque-server').with(
+        :ensure => 'running',
+        :enable => true
+  )}
 
   it {
     should contain_file(

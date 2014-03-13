@@ -1,14 +1,15 @@
 class torque::mom(
-  $torque_server  = $torque::torque_server,
-  $restricted     = [],
-  $ideal_load_adj = 0.2,
-  $max_load_adj   = 1.2,
-  $options        = {
-                      logevent => 255,
-                    },
-  $usecp          = [],
+  $torque_server     = $torque::torque_server,
+  $restricted        = [],
+  $ideal_load_adj    = 0.2,
+  $max_load_adj      = 1.2,
+  $options           = {
+                       logevent => 255,
+                     },
+  $usecp             = [],
   $mom_prologue_file = undef,
   $mom_epilogue_file = undef,
+  $mom_ensure        = 'installed',
 ) {
 
   # job execution engine for Torque batch system

@@ -1,18 +1,19 @@
 class torque::client(
   $server_name,
   $mom_ensure         = 'installed',
-  $ensure             = 'installed',
+  $package_ensure     = 'installed',
   $mom_service_enable = true,
-  $mom_service_ensure = true,
+  $mom_service_ensure = 'running',
   ) inherits torque {
 
   # command line interface to Torque server
   package { 'torque-client':
-    ensure => $ensure,
+    ensure => $package_ensure,
   }
 
   class { 'torque::mom':
-    torque_server =>  $server_name,
+    torque_server => $server_name,
+    mom_ensure    => $mom_ensure
   }
 
   service { 'pbs_mom':
