@@ -72,7 +72,7 @@ class torque::mom(
     enable     => $mom_service_enable,
     hasrestart => true,
     hasstatus  => true,
-    require    => [Package['torque-mom'], Class['torque::mom']],
+    require    => [Package['torque-mom']],
     subscribe  => File["${torque_home}/mom_priv/config"],
   }
 
