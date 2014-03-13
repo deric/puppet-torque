@@ -1,7 +1,7 @@
 #puppet-torque
 [![Build Status](https://travis-ci.org/deric/puppet-torque.png?branch=master)](https://travis-ci.org/deric/puppet-torque)
 
-This is a Puppet module for managing Torque resource manager and Maui.
+This is a Puppet module for managing Torque resource manager and Maui scheduler.
 
 ## Usage
 
@@ -24,6 +24,12 @@ class { 'torque::client':
   server_name => 'server.example.com'
 }
 ```
+## Maui
+
+In order to install Maui you have to have a binary package for your distribution.
+
+ * [Debian/Ubuntu](https://github.com/deric/maui-deb-packaging)
+
 
 ## Hiera support
 
