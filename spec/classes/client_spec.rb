@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'torque::client' do
+  include_context 'hieradata'
 
   let(:facts) {{
     :operatingsystem => 'Debian',
@@ -8,10 +9,7 @@ describe 'torque::client' do
     :lsbdistcodename => 'wheezy',
     :lsbdistid       => 'Debian',
     :processorcount  => 2,
-  }}
-
-  let(:params){{
-    :server_name => 'foo.bar'
+    :hostname        => 'foo.bar',
   }}
 
   it { should contain_class('torque::client') }

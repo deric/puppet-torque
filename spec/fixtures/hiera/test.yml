@@ -1,4 +1,6 @@
 ---
+torque::server_name: 'foo.bar'
 torque:
+  server_name: 'foo.bar'
   server:
     server_ensure: 'present'

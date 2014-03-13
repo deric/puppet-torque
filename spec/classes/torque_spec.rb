@@ -26,7 +26,18 @@ describe 'torque' do
           'location' => 'http://debian.physik.hu-berlin.de/addons/wheezy'
         )}
       end
+
+      context 'setting custom server_name' do
+        let(:params) {{
+          :server_name => 'server.example.com'
+        }}
+
+        it {
+          should contain_file(
+            '/etc/torque/server_name'
+          ).with_content(/server.example.com/)
+        }
+      end
     end
   end
-
 end

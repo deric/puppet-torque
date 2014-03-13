@@ -1,5 +1,5 @@
 class torque::mom(
-  $server_name,
+  $server_name       = $torque::server_name,
   $restricted        = [],
   $ideal_load_adj    = 0.2,
   $max_load_adj      = 1.2,
@@ -10,7 +10,7 @@ class torque::mom(
   $mom_prologue_file = undef,
   $mom_epilogue_file = undef,
   $mom_ensure        = 'installed',
-) {
+) inherits torque {
 
   # job execution engine for Torque batch system
   package { 'torque-mom':
@@ -39,17 +39,6 @@ class torque::mom(
     mode    => '0644',
     require => [File['/etc/torque/mom'], Package['torque-mom']],
   }
-
-  # on server we would get duplicate error, on client
-  # have to ensure that the master server name exists
-  ensure_resource('file', '/etc/torque/server_name', {
-    ensure  => 'present',
-    content => template("${module_name}/server_name.erb"),
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => Package['torque-mom'],
-  })
 
   if ( $mom_prologue_file )  {
     file { '/var/lib/torque/mom_priv/prologue':

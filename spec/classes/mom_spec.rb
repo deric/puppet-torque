@@ -8,10 +8,7 @@ describe 'torque::mom' do
     :lsbdistcodename => 'wheezy',
     :lsbdistid       => 'Debian',
     :processorcount  => 2,
-  }}
-
-  let(:params){{
-    :server_name => 'foo.bar',
+    :hostname        => 'foo.bar',
   }}
 
   it { should contain_class('torque::mom') }
