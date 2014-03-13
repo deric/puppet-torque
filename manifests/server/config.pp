@@ -3,8 +3,13 @@ class torque::server::config (
   $qmgr_queue_defaults,
   $qmgr_queues,
   $qmgr_present,
-  $torque_home = '/var/spool/torque'
+  $torque_home = '/var/spool/torque',
+  $export_tag = 'torque'
 ) {
+
+  include concat::setup
+
+  Concat::Fragment <<| tag == $export_tag |>>
 
   validate_array($qmgr_server)
   validate_array($qmgr_queue_defaults)
@@ -38,4 +43,20 @@ class torque::server::config (
     subscribe   => File["${torque_home}/qmgr_config"],
     logoutput   => true,
   }
+
+  file { "${torque_home}/server_priv":
+    ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+  }
+
+  concat{ "${torque_home}/server_priv/nodes":
+    owner   => root,
+    group   => 0,
+    mode    => '0644',
+    require => File["${torque_home}/server_priv"]
+  }
+
+
 }

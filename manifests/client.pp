@@ -6,7 +6,11 @@ class torque::client(
   $mom_service_enable = true,
   $mom_service_ensure = 'running',
   $enable_munge       = false,
+  $torque_home        = '/var/spool/torque',
+  $cpus               = $::processorcount,
   ) inherits torque {
+
+  $fhost = $name
 
   # command line interface to Torque server
   package { 'torque-client':
@@ -23,5 +27,11 @@ class torque::client(
 
   if($enable_munge) {
     class { 'torque::munge': }
+  }
+
+  @@concat::fragment{ "torque_client_${fhost}":
+    target  => "${torque_home}/server_priv/nodes",
+    content => template("${module_name}/client.erb"),
+    tag     => 'torque',
   }
 }

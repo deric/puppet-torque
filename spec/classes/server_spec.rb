@@ -8,6 +8,7 @@ describe 'torque::server' do
     :lsbdistcodename => 'wheezy',
     :lsbdistid       => 'Debian',
     :hostname        => 'foo.bar',
+    :concat_basedir  => '/var/lib/puppet/concat',
   }}
 
   include_context 'hieradata'
