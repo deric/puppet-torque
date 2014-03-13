@@ -1,6 +1,7 @@
 # Torque server installation
 #
 class torque::server(
+  $server_name    = $::hostname,
   $server_ensure  = 'present',
   $client_ensure  = 'present',
   $service_name   = 'torque-server',
@@ -11,11 +12,23 @@ class torque::server(
   package { 'torque-server':
     ensure => $server_ensure,
   }
+
+  file { '/etc/torque/server_name':
+    ensure  => 'present',
+    content => template("${module_name}/server_name.erb"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Package['torque-server'],
+  }
+
   package { 'torque-client':
     ensure => $client_ensure,
   }
 
-  class { 'torque::server::config': }
+  class { 'torque::server::config':
+    server_name => $server_name,
+  }
 
   service { $service_name:
     ensure     => $service_ensure,

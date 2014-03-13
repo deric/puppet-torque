@@ -47,6 +47,7 @@ class torque::mom(
     mode    => '0644',
     require => Package['torque-mom'],
   }
+
   if ( $mom_prologue_file )  {
     file { '/var/lib/torque/mom_priv/prologue':
       ensure  => 'present',
@@ -57,6 +58,7 @@ class torque::mom(
       require => [File['/var/lib/torque/mom_priv'], Package['torque-mom']],
     }
   }
+
   if ( $mom_epilogue_file )  {
     file { '/var/lib/torque/mom_priv/epilogue':
       ensure  => 'present',

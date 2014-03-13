@@ -8,13 +8,11 @@
 #
 # Requires: see Modulefile
 #
-# Sample Usage:
+# Do not use this class directly (use either server or client)
 #
 class torque(
-  $server_name    = $::fqdn,
   $manage_repo    = false,
   $package_source = 'hu-berlin',
-
 ) {
 
   class {'torque::repo':
