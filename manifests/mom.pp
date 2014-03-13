@@ -10,6 +10,8 @@ class torque::mom(
   $mom_prologue_file = undef,
   $mom_epilogue_file = undef,
   $mom_ensure        = 'installed',
+  # For TORQUE 2.1 and later, TORQUE_HOME is /var/spool/torque/
+  $torque_home       = '/var/spool/torque'
 ) inherits torque {
 
   # job execution engine for Torque batch system
@@ -24,41 +26,41 @@ class torque::mom(
     mode    => '0644',
   }
 
-  file { '/var/lib/torque/mom_priv':
+  file { "${torque_home}/mom_priv":
     ensure  => 'directory',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
   }
 
-  file { '/etc/torque/mom/config':
+  file { "${torque_home}/mom_priv/config":
     ensure  => 'present',
     content => template('torque/pbs_config.erb'),
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    require => [File['/etc/torque/mom'], Package['torque-mom']],
+    require => [File["${torque_home}/mom_priv"], Package['torque-mom']],
   }
 
   if ( $mom_prologue_file )  {
-    file { '/var/lib/torque/mom_priv/prologue':
+    file { "${torque_home}/mom_priv/prologue":
       ensure  => 'present',
       source  => $mom_prologue_file,
       owner   => 'root',
       group   => 'root',
       mode    => '0755',
-      require => [File['/var/lib/torque/mom_priv'], Package['torque-mom']],
+      require => [File["${torque_home}/mom_priv"], Package['torque-mom']],
     }
   }
 
   if ( $mom_epilogue_file )  {
-    file { '/var/lib/torque/mom_priv/epilogue':
+    file { "${torque_home}/mom_priv/epilogue":
       ensure  => 'present',
       source  => $mom_epilogue_file,
       owner   => 'root',
       group   => 'root',
       mode    => '0755',
-      require => [File['/var/lib/torque/mom_priv'],Package['torque-mom']],
+      require => [File["${torque_home}/mom_priv"], Package['torque-mom']],
     }
   }
 }
