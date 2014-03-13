@@ -15,6 +15,8 @@ describe 'torque::server' do
   it { should compile.with_all_deps }
   it { should contain_class('torque::server') }
   it { should contain_class('torque::server::config') }
+  it { should contain_class('torque::maui') }
+  it { should_not contain_class('torque::munge') }
 
   it { should contain_package('torque-server') }
   it { should contain_service('torque-server').with(

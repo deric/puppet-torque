@@ -2,8 +2,10 @@ class torque::client(
   $server_name,
   $mom_ensure         = 'installed',
   $package_ensure     = 'installed',
+  $mom_service_name   = 'torque-mom',
   $mom_service_enable = true,
   $mom_service_ensure = 'running',
+  $enable_munge       = false,
   ) inherits torque {
 
   # command line interface to Torque server
@@ -16,7 +18,7 @@ class torque::client(
     mom_ensure    => $mom_ensure
   }
 
-  service { 'pbs_mom':
+  service { $mom_service_name:
     ensure     => $mom_service_ensure,
     enable     => $mom_service_enable,
     hasrestart => true,
@@ -25,5 +27,7 @@ class torque::client(
     subscribe  => File['/etc/torque/mom/config'],
   }
 
-  class { 'torque::munge': }
+  if($enable_munge) {
+    class { 'torque::munge': }
+  }
 }

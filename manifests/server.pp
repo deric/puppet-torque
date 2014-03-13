@@ -48,7 +48,9 @@ class torque::server(
   # empty, because queues are not set up by default
   # this is a hash with the queue name as key and an array of configuration options as value
   # if no value is specified then the default options array ($qmgr_qdefaults) is used
-  $qmgr_queues = {},
+  $qmgr_queues  = {},
+  $enable_maui  = true,
+  $enable_munge = false,
 ) inherits torque {
 
   package { 'torque-server':
@@ -80,6 +82,11 @@ class torque::server(
     subscribe  => File['/etc/torque/server_name'],
   }
 
-  #class { 'torque::munge': }
-  class { 'torque::maui': }
+  if($enable_maui){
+    class { 'torque::maui': }
+  }
+
+  if($enable_munge) {
+    class { 'torque::munge': }
+  }
 }

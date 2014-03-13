@@ -25,7 +25,9 @@ describe 'torque::client' do
         :ensure => 'installed'
   )}
 
-  it { should contain_service('pbs_mom').with(
+  # on Debian/Ubuntu it's torque-mom, some other distributions
+  # maybe pbs_mom
+  it { should contain_service('torque-mom').with(
         :ensure => 'running',
         :enable => true
   )}
