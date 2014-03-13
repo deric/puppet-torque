@@ -4,9 +4,10 @@ describe 'torque::server' do
 
   let(:facts) {{
     :operatingsystem => 'Debian',
-    :osfamily => 'Debian',
+    :osfamily        => 'Debian',
     :lsbdistcodename => 'wheezy',
-    :lsbdistid => 'Debian',
+    :lsbdistid       => 'Debian',
+    :hostname        => 'foo.bar',
   }}
 
   include_context 'hieradata'
@@ -15,4 +16,15 @@ describe 'torque::server' do
 
   it { should contain_package('torque-server') }
   it { should contain_service('torque-server') }
+
+  it {
+    should contain_file(
+      '/etc/torque/server_name'
+    ).with({
+    'ensure'  => 'present',
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0644',
+    }).with_content(/foo.bar/)
+  }
 end
