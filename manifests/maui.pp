@@ -9,6 +9,7 @@ class torque::maui(
   $service_ensure    = 'running',
   $package           = 'maui',
   $service_enable    = true,
+  $service_name      = 'maui',
   $server            = $::fqdn,
   $port              = 42559,
   $mode              = 'NORMAL',
@@ -36,6 +37,11 @@ class torque::maui(
   $usercfg           = {},
   $srcfg             = {},
 ) {
+  validate_bool($service_enable)
+  validate_hash($options)
+  validate_hash($groupcfg)
+  validate_hash($usercfg)
+  validate_hash($srcfg)
 
   package { $package:
     ensure => $install_ensure,
@@ -61,7 +67,7 @@ class torque::maui(
     }
   }
 
-  service { 'maui':
+  service { $service_name:
     ensure     => $service_ensure,
     enable     => $service_enable,
     hasrestart => true,
