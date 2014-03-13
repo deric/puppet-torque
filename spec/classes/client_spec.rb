@@ -18,10 +18,11 @@ describe 'torque::client' do
   it { should contain_class('torque::mom') }
 
   it { should contain_package('torque-mom').with(
-        :ensure => 'installed',
+        :ensure => 'installed'
   )}
+
   it { should contain_package('torque-client').with(
-        :ensure => 'installed',
+        :ensure => 'installed'
   )}
 
   it { should contain_service('pbs_mom').with(

@@ -11,7 +11,7 @@ describe 'torque::munge' do
 
   it { should contain_class('torque::munge') }
   it { should contain_package('munge').with(
-        :ensure => 'installed',
+        :ensure => 'installed'
   )}
 
   it { should contain_service('munge').with(
@@ -26,7 +26,7 @@ describe 'torque::munge' do
     'ensure'  => 'present',
     'owner'   => 'munge',
     'group'   => 'munge',
-    'mode'    => '0400',
+    'mode'    => '0400'
     })
   }
 

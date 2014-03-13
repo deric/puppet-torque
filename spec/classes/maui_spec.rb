@@ -11,7 +11,7 @@ describe 'torque::maui' do
 
   it { should contain_class('torque::maui') }
   it { should contain_package('maui').with(
-        :ensure => 'installed',
+        :ensure => 'installed'
   )}
 
   it { should contain_service('maui').with(
@@ -26,8 +26,9 @@ describe 'torque::maui' do
     'ensure'  => 'present',
     'owner'   => 'root',
     'group'   => 'root',
-    'mode'    => '0644',
-    }).with_content(/# maui.cfg 3.3.1/)
-  }
+    'mode'    => '0644'
+    }).with_content(
+      /# maui.cfg 3.3.1/
+  )}
 
 end
