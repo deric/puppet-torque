@@ -29,4 +29,15 @@ describe 'torque::client' do
         :ensure => 'running',
         :enable => true
   )}
+
+  it {
+    should contain_file(
+      '/etc/torque/server_name'
+    ).with({
+    'ensure'  => 'present',
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0644',
+    }).with_content(/foo.bar/)
+  }
 end

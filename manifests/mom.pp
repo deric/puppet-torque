@@ -1,5 +1,5 @@
 class torque::mom(
-  $torque_server     = $torque::torque_server,
+  $server_name,
   $restricted        = [],
   $ideal_load_adj    = 0.2,
   $max_load_adj      = 1.2,
@@ -39,6 +39,17 @@ class torque::mom(
     mode    => '0644',
     require => [File['/etc/torque/mom'], Package['torque-mom']],
   }
+
+  # on server we would get duplicate error, on client
+  # have to ensure that the master server name exists
+  ensure_resource('file', '/etc/torque/server_name', {
+    ensure  => 'present',
+    content => template("torque/server_name.erb"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Package['torque-mom'],
+  })
 
   if ( $mom_prologue_file )  {
     file { '/var/lib/torque/mom_priv/prologue':

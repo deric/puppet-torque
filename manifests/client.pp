@@ -12,7 +12,7 @@ class torque::client(
   }
 
   class { 'torque::mom':
-    torque_server => $server_name,
+    server_name   => $server_name,
     mom_ensure    => $mom_ensure
   }
 
