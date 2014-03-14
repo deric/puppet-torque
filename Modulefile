@@ -1,5 +1,5 @@
 name    'deric-torque'
-version '0.1.0'
+version '0.2.0'
 source 'https://github.com/deric/puppet-torque.git'
 author 'Tomas Barton'
 license 'Apache License, Version 2.0'
@@ -9,3 +9,4 @@ project_page 'https://github.com/deric/puppet-torque'
 
 dependency 'puppetlabs/stdlib', '>= 2.0.0'
 dependency 'puppetlabs/apt', '>= 1.0.0'
+dependency 'puppetlabs/concat', '>=1.0.0'
