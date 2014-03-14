@@ -7,8 +7,9 @@ class torque::client(
   $mom_service_ensure = 'running',
   $enable_munge       = false,
   $torque_home        = '/var/spool/torque',
+  $hostname           = $::hostname,
   $cpus               = $::processorcount,
-  $hostname           = $::hostname
+  $gpus               = 0,
   ) inherits torque {
 
   $fhost = $::fqdn

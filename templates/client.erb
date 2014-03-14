@@ -1,9 +1,1 @@
-<%
-  # Downcase all information
-  dom = scope.lookupvar('::domain').downcase
-%>
-
-### Torque client from Puppet template
-# Domain: <%= @dom %>
-# Registered on: <%= @h %>
-<%= @hostname %> np=<%= @cpus %>
+<%= @hostname %> np=<%= @cpus %> gpus=<%= @gpus %>
