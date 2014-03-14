@@ -4,7 +4,8 @@ class torque::server::config (
   $qmgr_queues,
   $qmgr_present,
   $torque_home = '/var/spool/torque',
-  $export_tag = 'torque'
+  $export_tag = 'torque',
+  $service_name = 'torque-server'
 ) {
 
   include concat::setup
@@ -55,7 +56,8 @@ class torque::server::config (
     owner   => root,
     group   => 0,
     mode    => '0644',
-    require => File["${torque_home}/server_priv"]
+    require => File["${torque_home}/server_priv"],
+    notify  => Service[$service_name]
   }
 
 
