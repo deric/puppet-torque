@@ -25,6 +25,18 @@ client (a computing node):
 class { 'torque::client': }
 ```
 
+### Queues
+
+Queues can be configured via `qmgr_queues` hash which you pass to `torque::server`.
+
+```yaml
+torque::server::qmgr_queues:
+  short:
+    - 'enabled = True'
+    - 'started = True'
+    - 'queue_type = Execution'
+```
+
 
 ## Maui
 
