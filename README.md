@@ -40,7 +40,11 @@ Hiera is supported out-of-the-box, you can set any class parameter from YAML con
 ```yaml
 torque::server_name: '192.168.1.1'
 ```
+## Dependencies
 
+  * `puppetlabs/stdlib  >= 2.0.0`
+  * `puppetlabs/apt >= 1.0.0`
+  * `puppetlabs/concat >=1.0.0`
 
 ## License
 
