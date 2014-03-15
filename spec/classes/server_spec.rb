@@ -46,4 +46,5 @@ describe 'torque::server' do
     'mode'    => '0600',
     }).with_content(/# server commands/)
   }
+
 end

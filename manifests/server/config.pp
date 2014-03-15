@@ -50,6 +50,7 @@ class torque::server::config (
     owner   => 'root',
     group   => 'root',
     mode    => '0600',
+    require => File[$torque_home]
   }
 
   concat{ "${torque_home}/server_priv/nodes":
