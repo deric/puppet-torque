@@ -47,4 +47,35 @@ describe 'torque::server' do
     }).with_content(/# server commands/)
   }
 
+  context 'setting default queue' do
+    let(:params){{
+        :qmgr_conf => [
+          'default_queue = my_queue'
+        ]
+    }}
+
+    it { should contain_file(
+        '/var/spool/torque/qmgr_config'
+      ).with_content(/default_queue = my_queue/) }
+
+    # should merge with defaults config
+    it { should contain_file(
+        '/var/spool/torque/qmgr_config'
+      ).with_content(/node_check_rate = 150/) }
+  end
+
+  # TODO config should be a Hash, so that
+  # we can merge it
+  context 'overriding defaults' do
+    let(:params){{
+        :qmgr_conf => [
+          'node_check_rate = 300'
+        ]
+    }}
+
+    # it just appends at the end of the array
+    it { should contain_file(
+        '/var/spool/torque/qmgr_config'
+      ).with_content(/node_check_rate = 300/) }
+  end
 end

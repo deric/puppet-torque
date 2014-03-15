@@ -1,5 +1,10 @@
 # Torque server installation
 #
+# qmgr_conf
+#  * default_queue = queue_name
+#  * default_node = node_name
+#
+#
 class torque::server(
   $server_ensure  = 'present',
   $service_name   = 'torque-server',
@@ -13,7 +18,7 @@ class torque::server(
     'tcp_timeout',
     'next_job_number',
   ],
-  $qmgr_conf      = [
+  $qmgr_defaults = [
     "acl_hosts = ${::fqdn}",
     'node_check_rate = 150',
     'tcp_timeout = 6',
@@ -22,7 +27,6 @@ class torque::server(
     'acl_host_enable = False',
     "managers = root@${::fqdn}",
     "operators = root@${::fqdn}",
-    'default_queue = dteam',
     'log_events = 511',
     'mail_from = adm',
     'mail_domain = never',
@@ -35,6 +39,7 @@ class torque::server(
 # in all versions
 #    "authorized_users = *@${::fqdn}",
   ],
+  $qmgr_conf = [],
   $qmgr_queue_defaults = [
     'queue_type = Execution',
     'resources_max.cput = 48:00:00',
@@ -54,13 +59,17 @@ class torque::server(
 
   validate_bool($enable_maui)
   validate_bool($enable_munge)
+  validate_array($qmgr_conf)
+  validate_array($qmgr_defaults)
+
+  $qmgr_merged = concat($qmgr_defaults, $qmgr_conf)
 
   package { 'torque-server':
     ensure => $server_ensure,
   }
 
   class { 'torque::server::config':
-    qmgr_server         => $qmgr_conf,
+    qmgr_server         => $qmgr_merged,
     qmgr_present        => $qmgr_present,
     qmgr_queue_defaults => $qmgr_queue_defaults,
     qmgr_queues         => $qmgr_queues,
