@@ -42,18 +42,18 @@ class torque::client(
     mode    => '0644',
   }
 
-  concat { 'torque-nodes':
-    path    => "${torque_home}/server_priv/nodes",
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-  }
+  #concat { 'torque-nodes':
+  #  path    => "${torque_home}/server_priv/nodes",
+  #  owner   => 'root',
+  #  group   => 'root',
+  #  mode    => '0644',
+  #}
 
-  concat::fragment{ "torque_client":
-    ensure  => present,
-    target  => 'torque-nodes',
-    content => template("${module_name}/client.erb"),
-    tag     => 'torque',
-    order   => '001',
-  }
+  #concat::fragment{ "torque_client":
+  #  ensure  => present,
+  #  target  => 'torque-nodes',
+  #  content => template("${module_name}/client.erb"),
+  #  tag     => 'torque',
+  #  order   => '001',
+  #}
 }
