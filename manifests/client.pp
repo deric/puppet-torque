@@ -42,16 +42,18 @@ class torque::client(
     mode    => '0644',
   }
 
+  $concat_target = "${torque_home}/server_priv/node_${fhost}"
+
   concat { 'torque-nodes':
-    path    => "${torque_home}/server_priv/nodes",
+    path    => $concat_target,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
   }
 
-  concat::fragment{ "torque_client_${fhost}":
+  concat::fragment{ "torque_client":
     ensure  => present,
-    target  => 'torque-nodes',
+    target  => $concat_target,
     content => template("${module_name}/client.erb"),
     tag     => 'torque',
     order   => '001',
