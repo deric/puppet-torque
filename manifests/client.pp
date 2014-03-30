@@ -49,7 +49,7 @@ class torque::client(
     mode    => '0644',
   }
 
-  @@concat::fragment{ "torque_client_${fhost}":
+  concat::fragment{ "torque_client_${fhost}":
     ensure  => present,
     target  => 'torque-nodes',
     content => template("${module_name}/client.erb"),
