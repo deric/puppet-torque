@@ -45,13 +45,14 @@ class torque::server::config (
     logoutput   => true,
   }
 
-  file { "${torque_home}/server_priv":
-    ensure  => 'directory',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    require => File[$torque_home]
-  }
+  ensure_resource('file', "${torque_home}/server_priv",
+     {'ensure'  => 'directory',
+      'owner'   => 'root',
+      'group'   => 'root',
+      'mode'    => '0600',
+      'require' => File[$torque_home]
+    }
+  )
 
   concat{ "${torque_home}/server_priv/nodes":
     owner   => root,
@@ -59,6 +60,5 @@ class torque::server::config (
     mode    => '0644',
     require => File["${torque_home}/server_priv"]
   }
-
 
 }
