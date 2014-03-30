@@ -45,11 +45,4 @@ class torque::server::config (
     logoutput   => true,
   }
 
-  concat{ "${torque_home}/server_priv/nodes":
-    owner   => root,
-    group   => 0,
-    mode    => '0644',
-    notify  => Service[$service_name]
-  }
-
 }

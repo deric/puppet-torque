@@ -31,7 +31,14 @@ class torque::client(
     class { 'torque::munge': }
   }
 
-  @@concat::fragment{ "torque_client_${fhost}":
+  concat { "${torque_home}/server_priv/nodes":
+    ensure => present,
+    owner  => root,
+    group  => 0,
+    mode   => '0644',
+  }
+
+  concat::fragment{ "torque_client_${fhost}":
     target  => "${torque_home}/server_priv/nodes",
     content => template("${module_name}/client.erb"),
     tag     => 'torque'
