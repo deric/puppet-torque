@@ -13,8 +13,6 @@ class torque::client(
   $export_tag         = 'torque',
   ) inherits torque {
 
-  include concat::setup
-
   Concat::Fragment <<| tag == $export_tag |>>
 
   $fhost = $::fqdn
@@ -49,10 +47,9 @@ class torque::client(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    require => File["${torque_home}/server_priv"]
   }
 
-  concat::fragment{ "torque_client_${fhost}":
+  @@concat::fragment{ "torque_client_${fhost}":
     ensure  => present,
     target  => 'torque-nodes',
     content => template("${module_name}/client.erb"),
