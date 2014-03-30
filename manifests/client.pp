@@ -31,9 +31,27 @@ class torque::client(
     class { 'torque::munge': }
   }
 
+  ensure_resource('file', '${torque_home}/server_priv',
+     {'ensure' => 'directory',
+      'owner'  => 'root',
+      'group'  => 'root',
+      'mode'   => '0600',
+    }
+  )
+
+  ensure_resource('file', '${torque_home}/server_priv/nodes',
+    { 'ensure'  => 'present',
+      'owner'   => 'root',
+      'group'   => 'root',
+      'mode'    => '0644',
+      'require' => File['${torque_home}/server_priv']
+    }
+  )
+
   @@concat::fragment{ "torque_client_${fhost}":
     target  => "${torque_home}/server_priv/nodes",
     content => template("${module_name}/client.erb"),
     tag     => 'torque',
+    require => File['${torque_home}/server_priv/nodes']
   }
 }
