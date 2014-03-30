@@ -71,6 +71,7 @@ class torque::server(
 
   class { 'torque::server::config':
     torque_home         => $torque_home,
+    service_name        => $service_name,
     qmgr_server         => $qmgr_merged,
     qmgr_present        => $qmgr_present,
     qmgr_queue_defaults => $qmgr_queue_defaults,
@@ -84,8 +85,7 @@ class torque::server(
     hasstatus  => true,
     require    => [ Package['torque-server'],
                     Class['torque::server::config']],
-    subscribe  => [ File['/etc/torque/server_name'],
-                    File["${torque_home}/server_priv"]],
+    subscribe  => [ File['/etc/torque/server_name']],
   }
 
   if($enable_maui){

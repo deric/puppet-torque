@@ -3,8 +3,8 @@ class torque::server::config (
   $qmgr_queue_defaults,
   $qmgr_queues,
   $qmgr_present,
-  $torque_home = '/var/spool/torque',
-  $export_tag = 'torque',
+  $torque_home  = '/var/spool/torque',
+  $export_tag   = 'torque',
   $service_name = 'torque-server'
 ) {
 
@@ -45,20 +45,11 @@ class torque::server::config (
     logoutput   => true,
   }
 
-  ensure_resource('file', "${torque_home}/server_priv",
-     {'ensure'  => 'directory',
-      'owner'   => 'root',
-      'group'   => 'root',
-      'mode'    => '0600',
-      'require' => File[$torque_home]
-    }
-  )
-
   concat{ "${torque_home}/server_priv/nodes":
     owner   => root,
     group   => 0,
     mode    => '0644',
-    require => File["${torque_home}/server_priv"]
+    notify  => Service[$service_name]
   }
 
 }
