@@ -10,7 +10,12 @@ class torque::client(
   $hostname           = $::hostname,
   $cpus               = $::processorcount,
   $gpus               = 0,
+  $export_tag         = 'torque',
   ) inherits torque {
+
+  include concat::setup
+
+  Concat::Fragment <<| tag == $export_tag |>>
 
   $fhost = $::fqdn
 

@@ -4,13 +4,8 @@ class torque::server::config (
   $qmgr_queues,
   $qmgr_present,
   $torque_home  = '/var/spool/torque',
-  $export_tag   = 'torque',
   $service_name = 'torque-server'
 ) {
-
-  include concat::setup
-
-  Concat::Fragment <<| tag == $export_tag |>>
 
   validate_array($qmgr_server)
   validate_array($qmgr_queue_defaults)
