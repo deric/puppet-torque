@@ -55,4 +55,16 @@ describe 'torque::client' do
     'mode'    => '0644',
     }).with_content(/pbsserver server.example.com/)
   }
+
+  it {
+    should contain_file(
+      '/var/spool/torque/server_priv/nodes'
+    ).with({
+    'ensure'  => 'present',
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0644',
+    })
+  }
+
 end

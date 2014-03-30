@@ -31,7 +31,7 @@ class torque::client(
     class { 'torque::munge': }
   }
 
-  ensure_resource('file', '${torque_home}/server_priv',
+  ensure_resource('file', "${torque_home}/server_priv",
      {'ensure' => 'directory',
       'owner'  => 'root',
       'group'  => 'root',
@@ -39,12 +39,12 @@ class torque::client(
     }
   )
 
-  ensure_resource('file', '${torque_home}/server_priv/nodes',
+  ensure_resource('file', "${torque_home}/server_priv/nodes",
     { 'ensure'  => 'present',
       'owner'   => 'root',
       'group'   => 'root',
       'mode'    => '0644',
-      'require' => File['${torque_home}/server_priv']
+      'require' => File["${torque_home}/server_priv"]
     }
   )
 
