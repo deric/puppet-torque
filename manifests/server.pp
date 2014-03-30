@@ -10,6 +10,7 @@ class torque::server(
   $service_name   = 'torque-server',
   $service_ensure = 'running',
   $service_enable = true,
+  $torque_home    = '/var/spool/torque',
   # the following options are protected from being unset
   # if they don't appear in torque_qmgr_server
   $qmgr_present   = [
@@ -69,6 +70,7 @@ class torque::server(
   }
 
   class { 'torque::server::config':
+    torque_home         => $torque_home,
     qmgr_server         => $qmgr_merged,
     qmgr_present        => $qmgr_present,
     qmgr_queue_defaults => $qmgr_queue_defaults,
@@ -80,8 +82,10 @@ class torque::server(
     enable     => $service_enable,
     hasrestart => true,
     hasstatus  => true,
-    require    => Package['torque-server'],
-    subscribe  => File['/etc/torque/server_name'],
+    require    => [ Package['torque-server'],
+                    Class['torque::server::config']],
+    subscribe  => [ File['/etc/torque/server_name'],
+                    File["${torque_home}/server_priv"]],
   }
 
   if($enable_maui){

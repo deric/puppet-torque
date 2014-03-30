@@ -57,8 +57,7 @@ class torque::server::config (
     owner   => root,
     group   => 0,
     mode    => '0644',
-    require => File["${torque_home}/server_priv"],
-    notify  => Service[$service_name]
+    require => File["${torque_home}/server_priv"]
   }
 
 
