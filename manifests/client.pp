@@ -31,15 +31,25 @@ class torque::client(
     class { 'torque::munge': }
   }
 
-  concat { "${torque_home}/server_priv/nodes":
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
+  file { "${torque_home}/server_priv":
+    ensure  => directory,
+    recurse => true,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+  }
+
+  concat { 'torque-nodes':
+    path    => "${torque_home}/server_priv/nodes",
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => File["${torque_home}/server_priv"]
   }
 
   concat::fragment{ "torque_client_${fhost}":
     ensure  => present,
-    target  => "${torque_home}/server_priv/nodes",
+    target  => 'torque-nodes',
     content => template("${module_name}/client.erb"),
     tag     => 'torque',
     order   => '001',
