@@ -34,7 +34,7 @@ class torque::server::config (
   exec { 'qmgr update':
     path        => '/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin',
     command     => "cat ${torque_home}/qmgr_config | qmgr",
-    onlyif      => "grep -vq \"^[[:space:]]*\(#\|$\)\" ${torque_home}/qmgr_config",
+    onlyif      => "grep -vq \"^[[:space:]]*\\(#\\|$\\)\" ${torque_home}/qmgr_config",
     refreshonly => true,
     subscribe   => File["${torque_home}/qmgr_config"],
     logoutput   => true,
