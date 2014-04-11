@@ -48,6 +48,13 @@ class torque::maui(
     ensure => $install_ensure,
   }
 
+  file { "${dir}":
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+  }
+
   if ($mauifile  != undef) {
     file { "${dir}/maui.cfg":
       ensure  => 'present',
@@ -55,7 +62,7 @@ class torque::maui(
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
-      require => Package[$package],
+      require => [File[$dir], Package[$package]],
     }
   } else {
     file { "${dir}/maui.cfg":
@@ -64,7 +71,7 @@ class torque::maui(
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
-      require => Package[$package],
+      require => [File[$dir], Package[$package]],
     }
   }
 

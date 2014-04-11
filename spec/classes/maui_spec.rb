@@ -20,7 +20,6 @@ describe 'torque::maui' do
         :enable => true
   )}
 
-
   it {
     should contain_file(
       '/usr/local/maui/maui.cfg'
@@ -33,15 +32,27 @@ describe 'torque::maui' do
       /SERVERHOST maui.example.com/
   )}
 
+  it {
+    should contain_file(
+      '/usr/local/maui'
+    ).with({
+    'ensure'  => 'directory',
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0644'
+    })
+  }
+
   context 'allow changing maui directory' do
+    let(:confdir) { '/var/spool/maui' }
     let(:params){{
-      :dir    => '/var/spool/maui',
+      :dir    => confdir,
       :server => 'server.example.com'
     }}
 
     it {
       should contain_file(
-        '/var/spool/maui/maui.cfg'
+        "#{confdir}/maui.cfg"
       ).with({
       'ensure'  => 'present',
       'owner'   => 'root',
