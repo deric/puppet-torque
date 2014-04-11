@@ -36,6 +36,7 @@ class torque::maui(
   $groupcfg          = {},
   $usercfg           = {},
   $srcfg             = {},
+  $dir               = '/usr/local/maui',
 ) {
   validate_bool($service_enable)
   validate_hash($options)
@@ -48,7 +49,7 @@ class torque::maui(
   }
 
   if ($mauifile  != undef) {
-    file { '/var/spool/maui/maui.cfg':
+    file { "${dir}/maui.cfg":
       ensure  => 'present',
       source  => $mauifile,
       owner   => 'root',
@@ -57,7 +58,7 @@ class torque::maui(
       require => Package[$package],
     }
   } else {
-    file { '/var/spool/maui/maui.cfg':
+    file { "${dir}/maui.cfg":
       ensure  => 'present',
       content => template("${module_name}/maui.cfg.erb"),
       owner   => 'root',
@@ -72,7 +73,7 @@ class torque::maui(
     enable     => $service_enable,
     hasrestart => true,
     hasstatus  => true,
-    require    => [Package[$package], File['/var/spool/maui/maui.cfg']],
-    subscribe  => File['/var/spool/maui/maui.cfg'],
+    require    => [Package[$package], File["${dir}/maui.cfg"]],
+    subscribe  => File["${dir}/maui.cfg"],
   }
 }

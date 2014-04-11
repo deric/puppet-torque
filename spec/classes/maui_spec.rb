@@ -7,6 +7,7 @@ describe 'torque::maui' do
     :osfamily        => 'Debian',
     :lsbdistcodename => 'wheezy',
     :lsbdistid       => 'Debian',
+    :fqdn            => 'maui.example.com'
   }}
 
   it { should contain_class('torque::maui') }
@@ -19,16 +20,36 @@ describe 'torque::maui' do
         :enable => true
   )}
 
+
   it {
     should contain_file(
-      '/var/spool/maui/maui.cfg'
+      '/usr/local/maui/maui.cfg'
     ).with({
     'ensure'  => 'present',
     'owner'   => 'root',
     'group'   => 'root',
     'mode'    => '0644'
     }).with_content(
-      /# maui.cfg 3.3.1/
+      /SERVERHOST maui.example.com/
   )}
+
+  context 'allow changing maui directory' do
+    let(:params){{
+      :dir    => '/var/spool/maui',
+      :server => 'server.example.com'
+    }}
+
+    it {
+      should contain_file(
+        '/var/spool/maui/maui.cfg'
+      ).with({
+      'ensure'  => 'present',
+      'owner'   => 'root',
+      'group'   => 'root',
+      'mode'    => '0644'
+      }).with_content(
+        /SERVERHOST server.example.com/
+    )}
+  end
 
 end
