@@ -25,6 +25,15 @@ client (a computing node):
 class { 'torque::client': }
 ```
 
+Default Torque home directory is `/var/spool/torque`, you can change it:
+
+```puppet
+class { 'torque':
+  torque_home => '/etc/torque'
+}
+```
+
+
 ### Queues
 
 Queues can be configured via `qmgr_queues` hash which you pass to `torque::server`.
@@ -37,6 +46,19 @@ torque::server::qmgr_queues:
     - 'queue_type = Execution'
 ```
 
+
+### Nodes
+
+Nodes can be specified via Hiera config (also you can pass a config hash to `torque::server` class):
+
+```yaml
+torque::server::nodes:
+  myserver1:
+    cpus: 10
+  gpu.example.com:
+    cpus: 5
+    gpus: 10
+```
 
 ## Maui
 
