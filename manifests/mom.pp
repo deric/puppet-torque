@@ -15,7 +15,7 @@ class torque::mom(
   $mom_service_enable = true,
   $mom_service_ensure = 'running',
   # For TORQUE 2.1 and later, TORQUE_HOME is /var/spool/torque/
-  $torque_home       = '/var/spool/torque'
+  $torque_home       = $torque::torque_home
 ) inherits torque {
 
   # job execution engine for Torque batch system
@@ -23,7 +23,7 @@ class torque::mom(
     ensure => $mom_ensure,
   }
 
-  file { '/etc/torque/mom':
+  file { "${torque_home}/mom":
     ensure  => 'directory',
     owner   => 'root',
     group   => 'root',
@@ -35,6 +35,7 @@ class torque::mom(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
+    require => File["${torque_home}/mom"]
   }
 
   file { "${torque_home}/mom_priv/config":

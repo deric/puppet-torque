@@ -22,6 +22,17 @@ describe 'torque::mom' do
 
   it {
     should contain_file(
+      "#{torque_home}/mom"
+    ).with({
+    'ensure'  => 'directory',
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0644',
+    })
+  }
+
+  it {
+    should contain_file(
       "#{torque_home}/server_name"
     ).with({
     'ensure'  => 'present',
