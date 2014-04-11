@@ -11,6 +11,8 @@ describe 'torque::server' do
     :concat_basedir  => '/var/lib/puppet/concat',
   }}
 
+  let(:torque_home) { '/var/spool/torque' }
+
   include_context 'hieradata'
 
   it { should compile.with_all_deps }
@@ -20,7 +22,7 @@ describe 'torque::server' do
   it { should_not contain_class('torque::munge') }
 
   it { should contain_file(
-    '/var/spool/torque/server_priv/nodes'
+    "#{torque_home}/server_priv/nodes"
     ).with({
     'owner'   => 'root',
     'group'   => 'root',
@@ -36,7 +38,7 @@ describe 'torque::server' do
 
   it {
     should contain_file(
-      '/etc/torque/server_name'
+      "#{torque_home}/server_name"
     ).with({
     'ensure'  => 'present',
     'owner'   => 'root',

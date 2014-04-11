@@ -15,13 +15,6 @@ class torque::server::config (
   $sconfig = torque_config_diff('server', $qmgr_server)
   $qconfig = torque_config_diff('queue', $qmgr_queues, $qmgr_queue_defaults)
 
-  file { $torque_home:
-    ensure  => 'directory',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-  }
-
   file { "${torque_home}/qmgr_config":
     ensure  => 'present',
     owner   => 'root',

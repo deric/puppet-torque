@@ -18,9 +18,11 @@ describe 'torque::mom' do
     :torque_server => 'my.server.com'
   }}
 
+  let(:torque_home) { '/var/spool/torque' }
+
   it {
     should contain_file(
-      '/etc/torque/server_name'
+      "#{torque_home}/server_name"
     ).with({
     'ensure'  => 'present',
     'owner'   => 'root',

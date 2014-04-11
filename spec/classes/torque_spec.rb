@@ -6,6 +6,8 @@ describe 'torque' do
     it { should contain_class('torque') }
   end
 
+  let(:torque_home) { '/var/spool/torque' }
+
   context 'Debian OS' do
     it_behaves_like 'a Linux OS' do
       let :facts do
@@ -16,6 +18,18 @@ describe 'torque' do
           :lsbdistid => 'debian',
         }
       end
+
+
+      it {
+        should contain_file(
+          "#{torque_home}"
+        ).with({
+        'ensure'  => 'directory',
+        'owner'   => 'root',
+        'group'   => 'root',
+        'mode'    => '0644',
+        })
+      }
 
       context 'enable apt repository' do
         let(:params) {{
@@ -34,7 +48,7 @@ describe 'torque' do
 
         it {
           should contain_file(
-            '/etc/torque/server_name'
+            "#{torque_home}/server_name"
           ).with_content(/server.example.com/)
         }
       end

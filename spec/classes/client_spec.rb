@@ -12,8 +12,11 @@ describe 'torque::client' do
     :hostname        => 'foo.bar',
   }}
 
+  let(:torque_home) { '/var/spool/torque' }
+
   let(:params) {{
-    :torque_server => 'server.example.com'
+    :torque_server => 'server.example.com',
+    :torque_home   => torque_home
   }}
 
   it { should contain_class('torque::client') }
@@ -36,7 +39,7 @@ describe 'torque::client' do
 
   it {
     should contain_file(
-      '/etc/torque/server_name'
+      "#{torque_home}/server_name"
     ).with({
     'ensure'  => 'present',
     'owner'   => 'root',

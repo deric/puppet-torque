@@ -6,7 +6,7 @@ class torque::client(
   $mom_service_enable = true,
   $mom_service_ensure = 'running',
   $enable_munge       = false,
-  $torque_home        = '/var/spool/torque',
+  $torque_home        = $torque::torque_home,
   $hostname           = $::hostname,
   $cpus               = $::processorcount,
   $gpus               = 0,
