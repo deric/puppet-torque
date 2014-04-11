@@ -14,14 +14,8 @@ describe 'torque::node' do
     }
   end
 
-  it { should contain_file(
-    '/var/spool/torque/server_priv/nodes'
-    ).with({
-    'owner'   => 'root',
-    'group'   => 'root',
-    'mode'    => '0644',
-    })
-  }
-  it { should contain_concat__fragment('torque_nodes').with_content(/foo.bar/) }
+  it { should contain_concat__fragment(
+    'torque_nodes_foo.bar'
+    ).with_content(/foo.bar/) }
 
 end

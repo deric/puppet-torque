@@ -19,6 +19,15 @@ describe 'torque::server' do
   it { should contain_class('torque::maui') }
   it { should_not contain_class('torque::munge') }
 
+  it { should contain_file(
+    '/var/spool/torque/server_priv/nodes'
+    ).with({
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0644',
+    })
+  }
+
   it { should contain_package('torque-server') }
   it { should contain_service('torque-server').with(
         :ensure => 'running',

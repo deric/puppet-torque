@@ -69,6 +69,16 @@ class torque::server(
     ensure => $server_ensure,
   }
 
+  Concat::Fragment <<| tag == 'torque' |>>
+
+  $nodes_config = "${torque_home}/server_priv/nodes"
+
+  concat { $nodes_config:
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+  }
+
   class { 'torque::server::config':
     torque_home         => $torque_home,
     service_name        => $service_name,
