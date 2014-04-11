@@ -31,11 +31,11 @@ describe 'torque' do
         })
       }
 
-      it { should contain_file(
-        '/etc/torque/server_name'
-        ).with({
-          'ensure' => 'link'
-      })}
+      #it { should contain_file(
+      #  '/etc/torque/server_name'
+      #  ).with({
+      #    'ensure' => 'link'
+      #})}
 
       context 'enable apt repository' do
         let(:params) {{

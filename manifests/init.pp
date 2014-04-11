@@ -45,11 +45,18 @@ class torque(
       mode    => '0644',
     }
 
-    file{ '/etc/torque/server_name':
-      ensure  => link,
-      replace => true,
-      target  => "${torque_home}/server_name",
-      require => [File['/etc/torque'], File["${torque_home}/server_name"]],
+    # is creating recursive links
+    #file{ '/etc/torque/server_name':
+    #  ensure  => link,
+    #  replace => false,
+    #  target  => "${torque_home}/server_name",
+    #  require => [File['/etc/torque'], File["${torque_home}/server_name"]],
+    #}
+
+    exec { "create symbolic link":
+        command => "/bin/ln -s ${torque_home}/server_name /etc/torque/server_name",
+        unless  => '/usr/bin/test -f /etc/torque/server_name',
+        creates => '/etc/torque/server_name'
     }
 
   }
