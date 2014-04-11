@@ -87,4 +87,22 @@ describe 'torque::server' do
         '/var/spool/torque/qmgr_config'
       ).with_content(/node_check_rate = 300/) }
   end
+
+  context 'setting nodes' do
+    let(:params){{
+      :nodes => {
+        'server1' => { 'cpus' => 5 }
+      }
+    }}
+
+    it { should contain_file(
+      '/var/spool/torque/server_priv/nodes'
+      ).with({
+      'owner'   => 'root',
+      'group'   => 'root',
+      'mode'    => '0644',
+      }).with_content(/server1 np=5/)
+    }
+
+  end
 end

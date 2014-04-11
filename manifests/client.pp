@@ -40,8 +40,4 @@ class torque::client(
     mode    => '0644',
   }
 
-  ensure_resource('torque::node', {
-    torque_home => $torque_home,
-    hostname    => $hostname
-    })
 }

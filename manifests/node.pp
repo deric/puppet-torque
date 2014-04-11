@@ -5,7 +5,7 @@ define torque::node(
   $hostname           = $::hostname,
 ){
 
-  concat::fragment{ "torque_nodes_${hostname}":
+  @@concat::fragment{ "torque_nodes_${hostname}":
     ensure  => present,
     target  => $nodes_config,
     content => template("${module_name}/client.erb"),

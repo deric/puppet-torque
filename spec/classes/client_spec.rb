@@ -18,8 +18,6 @@ describe 'torque::client' do
 
   it { should contain_class('torque::client') }
   it { should contain_class('torque::mom') }
-  it { should contain_torque__node({"torque_home"=>"/var/spool/torque", "hostname"=>"foo.bar"}) }
-
 
   it { should contain_package('torque-mom').with(
         :ensure => 'installed'

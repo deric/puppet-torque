@@ -56,12 +56,14 @@ class torque::server(
   $qmgr_queues  = {},
   $enable_maui  = true,
   $enable_munge = false,
+  $nodes        = {}
 ) inherits torque {
 
   validate_bool($enable_maui)
   validate_bool($enable_munge)
   validate_array($qmgr_conf)
   validate_array($qmgr_defaults)
+  validate_hash($nodes)
 
   $qmgr_merged = concat($qmgr_defaults, $qmgr_conf)
 
@@ -69,14 +71,12 @@ class torque::server(
     ensure => $server_ensure,
   }
 
-  Concat::Fragment <<| tag == 'torque' |>>
-
-  $nodes_config = "${torque_home}/server_priv/nodes"
-
-  concat { $nodes_config:
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+  file { "${torque_home}/server_priv/nodes":
+    ensure   => present,
+    content  => template("${module_name}/nodes.erb"),
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0644',
   }
 
   class { 'torque::server::config':
