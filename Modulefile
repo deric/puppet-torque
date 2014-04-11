@@ -9,4 +9,3 @@ project_page 'https://github.com/deric/puppet-torque'
 
 dependency 'puppetlabs/stdlib', '>= 2.0.0'
 dependency 'puppetlabs/apt', '>= 1.0.0'
-dependency 'puppetlabs/concat', '>=1.0.0'
