@@ -1,4 +1,4 @@
-<% @nodes.each do |node, v| -%>
+<% @nodes.sort.each do |node, v| -%>
 <%- unless v.include? 'gpus'; v['gpus'] = 0; end -%>
 <%= node %> np=<%= v['cpus'] %> gpus=<%= v['gpus'] %>
 <% end -%>
