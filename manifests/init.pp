@@ -37,4 +37,21 @@ class torque(
     require => File[$torque_home]
   }
 
+  if $torque_home != '/etc/torque' {
+    file { '/etc/torque':
+      ensure  => 'directory',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+    }
+
+    file{ '/etc/torque/server_name':
+      ensure  => 'link',
+      path    => "/etc/torque/server_name",
+      target  => "${torque_home}/server_name",
+      require => [File['/etc/torque'], File["${torque_home}/server_name"]],
+    }
+
+  }
+
 }
