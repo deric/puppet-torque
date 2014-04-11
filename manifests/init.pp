@@ -46,8 +46,8 @@ class torque(
     }
 
     file{ '/etc/torque/server_name':
-      ensure  => 'link',
-      path    => "/etc/torque/server_name",
+      ensure  => link,
+      replace => true,
       target  => "${torque_home}/server_name",
       require => [File['/etc/torque'], File["${torque_home}/server_name"]],
     }
