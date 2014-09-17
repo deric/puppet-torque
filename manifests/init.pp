@@ -37,6 +37,14 @@ class torque(
     require => File[$torque_home]
   }
 
+  file { "/etc/torque/server_name":
+    ensure  => 'present',
+    content => template("${module_name}/server_name.erb"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+  }
+
   if $torque_home != '/etc/torque' {
     file { '/etc/torque':
       ensure  => 'directory',
@@ -53,11 +61,11 @@ class torque(
     #  require => [File['/etc/torque'], File["${torque_home}/server_name"]],
     #}
 
-    exec { "create symbolic link":
-        command => "/bin/ln -s ${torque_home}/server_name /etc/torque/server_name",
-        unless  => '/usr/bin/test -f /etc/torque/server_name',
-        creates => '/etc/torque/server_name'
-    }
+    #exec { "create symbolic link":
+    #    command => "/bin/ln -s ${torque_home}/server_name /etc/torque/server_name",
+    #    unless  => '/usr/bin/test -f /etc/torque/server_name',
+    #    creates => '/etc/torque/server_name'
+    #}
 
   }
 
