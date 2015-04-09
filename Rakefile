@@ -14,9 +14,25 @@ task :meta do
   sh "metadata-json-lint metadata.json"
 end
 
-PuppetLint.configuration.ignore_paths = ["spec/fixtures/modules/apt/manifests/*.pp"]
-PuppetLint.configuration.log_format = '%{path}:%{linenumber}:%{KIND}: %{message}'
-PuppetLint.configuration.send("disable_80chars")
+Rake::Task[:lint].clear
+PuppetLint::RakeTask.new :lint do |config|
+  config.disable_checks = [
+    '80chars',
+    'class_parameter_defaults',
+    'class_inherits_from_params_class'
+  ]
+  config.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
+  config.fail_on_warnings = true
+  #config.relative = true
+
+  exclude_paths = [
+    "pkg/**/*",
+    "vendor/**/*",
+    "spec/**/*",
+  ]
+
+  config.ignore_paths = exclude_paths
+end
 
 task :librarian_spec_prep do
   sh 'librarian-puppet install --path=spec/fixtures/modules/'
