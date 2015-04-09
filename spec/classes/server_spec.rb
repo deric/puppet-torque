@@ -68,8 +68,9 @@ describe 'torque::server' do
     }).with_content(/DAEMON_SERVER_OPTS/)
   }
 
-  it { should contain_file("/etc/default/torque-server")
-    .with_content(/-d \/var\/spool\/torque/)
+  it { should contain_file(
+    "/etc/default/torque-server"
+    ).with_content(/-d \/var\/spool\/torque/)
   }
 
   context 'setting default queue' do
