@@ -58,6 +58,20 @@ describe 'torque::server' do
     }).with_content(/# server commands/)
   }
 
+  it { should contain_file(
+      "/etc/default/torque-server"
+    ).with({
+    'ensure'  => 'present',
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0644',
+    }).with_content(/DAEMON_SERVER_OPTS/)
+  }
+
+  it { should contain_file("/etc/default/torque-server")
+    .with_content(/-d \/var\/spool\/torque/)
+  }
+
   context 'setting default queue' do
     let(:params){{
         :qmgr_conf => [
@@ -105,6 +119,16 @@ describe 'torque::server' do
       'mode'    => '0644',
       }).with_content(/server1 np=5/)
     }
-
   end
+
+  context 'change package name' do
+    let(:params){{
+      :package => 'pbs-server'
+    }}
+
+    it { should contain_package('pbs-server').with(
+      :ensure => 'present',
+    )}
+  end
+
 end

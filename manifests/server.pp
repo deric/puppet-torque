@@ -10,7 +10,7 @@ class torque::server(
   $service_name   = 'torque-server',
   $service_ensure = 'running',
   $service_enable = true,
-  $package        = 'torque-server'
+  $package        = 'torque-server',
   $torque_home    = $torque::torque_home,
   # the following options are protected from being unset
   # if they don't appear in torque_qmgr_server
