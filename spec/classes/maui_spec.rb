@@ -12,7 +12,7 @@ describe 'torque::maui' do
 
   it { should contain_class('torque::maui') }
   it { should contain_package('maui').with(
-        :ensure => 'installed'
+        :ensure => 'present'
   )}
 
   it { should contain_service('maui').with(

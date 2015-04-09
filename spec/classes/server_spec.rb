@@ -128,7 +128,7 @@ describe 'torque::server' do
     }}
 
     it { should contain_package('pbs-server').with(
-      :ensure => 'present',
+      :ensure => 'present'
     )}
   end
 
