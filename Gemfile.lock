@@ -8,14 +8,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.1)
-    activemodel (4.2.1)
-      activesupport (= 4.2.1)
+    activemodel (4.1.10)
+      activesupport (= 4.1.10)
       builder (~> 3.1)
-    activesupport (4.2.1)
-      i18n (~> 0.7)
+    activesupport (4.1.10)
+      i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
-      thread_safe (~> 0.3, >= 0.3.4)
+      thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     builder (3.2.2)
     diff-lcs (1.2.5)
@@ -127,7 +127,7 @@ GEM
     highline (1.6.21)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    i18n (0.7.0)
+    i18n (0.6.11)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     json (1.8.2)
@@ -232,6 +232,7 @@ PLATFORMS
 DEPENDENCIES
   hiera-puppet-helper!
   highline (< 1.7.0)
+  i18n (< 0.7.0)
   librarian-puppet (>= 0.9.10)
   metadata-json-lint
   puppet (>= 2.7.0)

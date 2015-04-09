@@ -12,6 +12,7 @@ group :rake do
   gem 'hiera-puppet-helper', :git => 'https://github.com/mmz-srf/hiera-puppet-helper.git'
   gem 'rspec-puppet', '>= 2.0',  :require => false
   gem 'highline', '< 1.7.0' #to maintain ruby 1.8.7 compatibility
+  gem 'i18n', '< 0.7.0' #to maintain ruby 1.8.7 compatibility
 end
 
 group :development do
