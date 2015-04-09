@@ -27,7 +27,7 @@ describe 'torque::server' do
     'owner'   => 'root',
     'group'   => 'root',
     'mode'    => '0644',
-    })
+    }).that_notifies('Service[torque-server]')
   }
 
   it { should contain_package('torque-server') }

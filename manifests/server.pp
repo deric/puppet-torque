@@ -77,6 +77,7 @@ class torque::server(
     owner    => 'root',
     group    => 'root',
     mode     => '0644',
+    notify   => Service[$service_name],
   }
 
   class { 'torque::server::config':
