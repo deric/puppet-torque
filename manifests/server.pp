@@ -10,6 +10,7 @@ class torque::server(
   $service_name   = 'torque-server',
   $service_ensure = 'running',
   $service_enable = true,
+  $package        = 'torque-server'
   $torque_home    = $torque::torque_home,
   # the following options are protected from being unset
   # if they don't appear in torque_qmgr_server
@@ -67,13 +68,23 @@ class torque::server(
 
   $qmgr_merged = concat($qmgr_defaults, $qmgr_conf)
 
-  package { 'torque-server':
+  package { $package:
     ensure => $server_ensure,
   }
 
   file { "${torque_home}/server_priv/nodes":
     ensure   => present,
     content  => template("${module_name}/nodes.erb"),
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0644',
+    notify   => Service[$service_name],
+    require  => Package[$package],
+  }
+
+  file { '/etc/default/torque-server':
+    ensure   => present,
+    content  => template("${module_name}/server_default.erb"),
     owner    => 'root',
     group    => 'root',
     mode     => '0644',
@@ -94,7 +105,7 @@ class torque::server(
     enable     => $service_enable,
     hasrestart => true,
     hasstatus  => true,
-    require    => [ Package['torque-server'],
+    require    => [ Package[$package],
                     Class['torque::server::config']],
     subscribe  => [ File["${torque_home}/server_name"]],
   }
