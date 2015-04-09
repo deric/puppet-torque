@@ -1,12 +1,12 @@
+# Torque mom -- scheduler
+#
 class torque::mom(
   # cluster scheduler address
   $torque_server,
   $restricted        = [],
   $ideal_load_adj    = 0.2,
   $max_load_adj      = 1.2,
-  $options           = {
-                       logevent => 255,
-                     },
+  $options           = { logevent => 255 },
   $usecp             = [],
   $mom_prologue_file = undef,
   $mom_epilogue_file = undef,
@@ -24,10 +24,10 @@ class torque::mom(
   }
 
   file { "${torque_home}/mom":
-    ensure  => 'directory',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+    ensure => 'directory',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
   }
 
   file { "${torque_home}/mom_priv":

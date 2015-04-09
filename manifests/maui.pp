@@ -1,11 +1,11 @@
+# maui options
+# Copy from file server
+# If [mauifile] is not undef, the maui configuration will be COPIED from the server rather than
+# BUILT from a template
 class torque::maui(
-  # maui options
-  # Copy from file server
-  # If this is not undef, the maui configuration will be COPIED from the server rather than
-  # BUILT from a template
   $mauifile          = undef,
   # set up maui using puppet
-  $install_ensure    = 'installed',
+  $install_ensure    = 'present',
   $service_ensure    = 'running',
   $package           = 'maui',
   $service_enable    = true,
@@ -48,11 +48,11 @@ class torque::maui(
     ensure => $install_ensure,
   }
 
-  file { "${dir}":
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+  file { $dir:
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
   }
 
   if ($mauifile  != undef) {

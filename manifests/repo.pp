@@ -1,3 +1,6 @@
+# Binary packages repository management
+# (disabled by default)
+#
 class torque::repo(
   $manage_repo    = true,
   $package_source = 'hu-berlin',

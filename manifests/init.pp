@@ -28,10 +28,10 @@ class torque(
   }
 
   file { $torque_home:
-    ensure  => 'directory',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+    ensure => 'directory',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
   }
 
   file { "${torque_home}/server_name":
@@ -43,7 +43,7 @@ class torque(
     require => File[$torque_home]
   }
 
-  file { "/etc/torque/server_name":
+  file { '/etc/torque/server_name':
     ensure  => 'present',
     content => template("${module_name}/server_name.erb"),
     owner   => 'root',
@@ -53,19 +53,19 @@ class torque(
 
   if !empty($log_dir) {
     file { $log_dir:
-      ensure  => 'directory',
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
+      ensure => 'directory',
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
     }
   }
 
   if $torque_home != '/etc/torque' {
     file { '/etc/torque':
-      ensure  => 'directory',
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
+      ensure => 'directory',
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
     }
 
     # is creating recursive links

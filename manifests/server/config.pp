@@ -1,3 +1,5 @@
+# Manages torque server configuration
+#
 class torque::server::config (
   $qmgr_server,
   $qmgr_queue_defaults,
@@ -32,5 +34,4 @@ class torque::server::config (
     subscribe   => File["${torque_home}/qmgr_config"],
     logoutput   => true,
   }
-
 }

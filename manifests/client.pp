@@ -1,3 +1,6 @@
+# Torque client -- mom
+#   should be install on computing nodes
+#
 class torque::client(
   $torque_server,
   $mom_ensure         = 'installed',

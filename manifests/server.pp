@@ -50,7 +50,7 @@ class torque::server(
     'started = True',
     'acl_group_enable = True',
   ],
-   # default queue definitions
+  # default queue definitions
   # empty, because queues are not set up by default
   # this is a hash with the queue name as key and an array of configuration options as value
   # if no value is specified then the default options array ($qmgr_qdefaults) is used
@@ -73,22 +73,22 @@ class torque::server(
   }
 
   file { "${torque_home}/server_priv/nodes":
-    ensure   => present,
-    content  => template("${module_name}/nodes.erb"),
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0644',
-    notify   => Service[$service_name],
-    require  => Package[$package],
+    ensure  => present,
+    content => template("${module_name}/nodes.erb"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    notify  => Service[$service_name],
+    require => Package[$package],
   }
 
   file { '/etc/default/torque-server':
-    ensure   => present,
-    content  => template("${module_name}/server_default.erb"),
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0644',
-    notify   => Service[$service_name],
+    ensure  => present,
+    content => template("${module_name}/server_default.erb"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    notify  => Service[$service_name],
   }
 
   class { 'torque::server::config':
