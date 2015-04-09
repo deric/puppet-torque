@@ -1,6 +1,6 @@
 {
   "name": "deric-torque",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "author": "Tomas Barton",
   "summary": "Module for managing Torque",
   "license": "Apache License, Version 2.0",
