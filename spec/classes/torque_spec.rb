@@ -19,10 +19,19 @@ describe 'torque' do
         }
       end
 
-
       it {
         should contain_file(
           "#{torque_home}"
+        ).with({
+        'ensure'  => 'directory',
+        'owner'   => 'root',
+        'group'   => 'root',
+        'mode'    => '0644',
+        })
+      }
+
+      it { should contain_file(
+          "/var/log/torque"
         ).with({
         'ensure'  => 'directory',
         'owner'   => 'root',

@@ -2,7 +2,11 @@
 #
 # This module manages torque
 #
-# Parameters: none
+# Parameters:
+#   [server_name]
+#   [manage_repo] name of binary packages source
+#   [torque_home] depends on distribution, might be /var/spool/torque or /usr/spool/PBS, etc.
+#   [log_dir] when undef logs will be stored to torque_home directory
 #
 # Actions:
 #
@@ -14,11 +18,13 @@ class torque(
   $server_name    = $::hostname,
   $manage_repo    = false,
   $package_source = 'hu-berlin',
-  $torque_home    = '/var/spool/torque'
+  $torque_home    = '/var/spool/torque',
+  $log_dir        = '/var/log/torque',
 ) {
 
   class {'torque::repo':
-    manage_repo => $manage_repo,
+    manage_repo    => $manage_repo,
+    package_source => $package_source,
   }
 
   file { $torque_home:
@@ -43,6 +49,15 @@ class torque(
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
+  }
+
+  if !empty($log_dir) {
+    file { $log_dir:
+      ensure  => 'directory',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+    }
   }
 
   if $torque_home != '/etc/torque' {
