@@ -10,6 +10,11 @@ group :rake do
   gem 'serverspec',              :require => false
   gem 'rspec-system-serverspec', :require => false
   gem 'hiera-puppet-helper', :git => 'https://github.com/mmz-srf/hiera-puppet-helper.git'
-  gem 'puppet-blacksmith',  :git => 'https://github.com/maestrodev/puppet-blacksmith.git'
-  gem 'rspec-puppet', :git => 'https://github.com/rodjek/rspec-puppet.git'
+  gem 'rspec-puppet', '>= 2.0',  :require => false
+  gem 'highline', '< 1.7.0' #to maintain ruby 1.8.7 compatibility
+end
+
+group :development do
+  gem 'puppet-blacksmith',  '~> 3.0'
+  gem 'metadata-json-lint',      :require => false
 end
