@@ -12,6 +12,9 @@ class torque::server(
   $service_enable = true,
   $package        = 'torque-server',
   $torque_home    = $torque::torque_home,
+  $log_dir        = $torque::log_dir,
+  $log_file       = 'server.log',
+  $use_logrotate  = true,
   # the following options are protected from being unset
   # if they don't appear in torque_qmgr_server
   $qmgr_present   = [
@@ -116,5 +119,15 @@ class torque::server(
 
   if($enable_munge) {
     class { 'torque::munge': }
+  }
+
+  if($use_logrotate and !empty($log_dir)){
+    file { '/etc/logrotate.d/torque':
+      ensure  => present,
+      content => template("${module_name}/logrotate.erb"),
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+    }
   }
 }

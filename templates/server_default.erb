@@ -1,2 +1,6 @@
 #!/bin/sh
-DAEMON_SERVER_OPTS="-d <%= @torque_home %>"
+<% opts = "-d " << @torque_home -%>
+<% unless @log_dir.nil? -%>
+<% opts << " -L " << @log_dir << "/" << @log_file -%>
+<% end -%>
+DAEMON_SERVER_OPTS="<%= opts %>"

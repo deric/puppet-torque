@@ -69,8 +69,23 @@ describe 'torque::server' do
   }
 
   it { should contain_file(
+      "/etc/logrotate.d/torque"
+    ).with({
+    'ensure'  => 'present',
+    'owner'   => 'root',
+    'group'   => 'root',
+    'mode'    => '0644',
+    }).with_content(/rotate/)
+  }
+
+  it { should contain_file(
     "/etc/default/torque-server"
     ).with_content(/-d \/var\/spool\/torque/)
+  }
+
+  it { should contain_file(
+    "/etc/default/torque-server"
+    ).with_content(/-L \/var\/log\/torque/)
   }
 
   context 'setting default queue' do
