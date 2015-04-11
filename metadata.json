@@ -1,6 +1,6 @@
 {
   "name": "deric-torque",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Tomas Barton",
   "summary": "Module for managing Torque",
   "license": "Apache License, Version 2.0",
@@ -9,7 +9,13 @@
   "issues_url": "https://github.com/deric/puppet-torque/issues",
   "description": "Torque is an open-source version of PBS",
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 2.0.0"},
-    {"name":"puppetlabs/apt","version_requirement":">= 1.0.0"}
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 2.0.0"
+    },
+    {
+      "name": "puppetlabs/apt",
+      "version_requirement": ">= 1.0.0"
+    }
   ]
 }
