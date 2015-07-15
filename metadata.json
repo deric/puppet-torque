@@ -10,12 +10,12 @@
   "description": "Torque is an open-source version of PBS",
   "dependencies": [
     {
-      "name": "puppetlabs/stdlib",
+      "name": "puppetlabs-stdlib",
       "version_requirement": ">= 2.0.0"
     },
     {
-      "name": "puppetlabs/apt",
-      "version_requirement": ">= 1.0.0"
+      "name": "puppetlabs-apt",
+      "version_requirement": ">= 2.0.0"
     }
   ]
 }
